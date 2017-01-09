@@ -18,7 +18,7 @@
 
         {% for poll in polls %}
         <center><h2><a href="/poll/{{ poll.id }}">{{ poll.question }}</a></h2></center>
-        <h2>started by <a href="/profile/{{ poll.user.username }}">{{ poll.user.username }} </h2>
+        <h2>started by <a href="/profile/{{ poll.user.username }}">{{ poll.user.username }}</a></h2>
 
         <p>
             {{ poll.response_yes }} users responded with <b>Yes</b>
