@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Flask 101</title>
+    </head>
+
+    <body>
+        {% if user %}
+        <center><h1>{{ user.username }}'s profile page. Welcome!</h1></center>
+
+        <p>
+            <b>{{ user.username }}</b> has been a member since {{ user.date_created }}!!!
+        </p>
+
+        <center><h1>{{ user.username }}'s polls</h1></center>
+
+        {% for poll in polls %}
+        <center><h2><a href="/poll/{{ poll.id }}">{{ poll.question }}</a></h2></center>
+        <h2>started by <a href="/profile/{{ poll.user.username }}">{{ poll.user.username }} </h2>
+
+        <p>
+            {{ poll.response_yes }} users responded with <b>Yes</b>
+            <br>
+            {{ poll.response_no }} users responded with <b>No</b>
+            <br>
+            <br>
+            This poll was started at {{ poll.date_created }}
+        </p>
+        <hr>
+        {% endfor %}
+
+        {% else %}
+        <h2>That user does not exist.</h2>
+        {% endif %}
+    </body>
+</html>

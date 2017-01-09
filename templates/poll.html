@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Flask 101</title>
+    </head>
+
+    <body>
+        {% if poll %}
+        <center><h1>{{ poll.question }}</h1></center>
+        <h2>This poll was started by the user <a href="/profile/{{ poll.user.username }}">{{ poll.user.username }}</a></h2>
+
+        <p>
+            {{ poll.response_yes }} users responded with <b>Yes</b>
+            <br>
+            {{ poll.response_no }} users responded with <b>No</b>
+            <br>
+            <br>
+            This poll was started at {{ poll.date_created }}
+            <h3>Vote Now!</h3>
+            <form action="/poll/{{ poll.id }}" method="POST">
+                <input type="radio" name="answer" value="yes" checked> Yes<br>
+                <input type="radio" name="answer" value="no"> No<br>
+                <input type="submit" value="Submit">
+            </form>
+
+        </p>
+        {% else %}
+        <h2>This poll does not exist</h2>
+        {% endif %}
+    </body>
+</html>

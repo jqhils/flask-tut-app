@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Flask 101</title>
+    </head>
+
+    <body>
+        {% if current_user.is_authenticated %}
+          Welcome, <a href="/profile/{{ current_user.username }}">{{ current_user.username }}</a>!
+          <br>
+          You are logged in.
+          <br>
+          <a href="/newpoll">Submit a new question</a>
+          <br>
+          <a href="/logout">Log Out</a>
+        {% endif %}
+
+        <center><h1>All Polls</h1></center>
+
+        {% for poll in polls %}
+        <center><h2><a href="/poll/{{ poll.id }}">{{ poll.question }}</a></h2></center>
+        <h2>started by <a href="/profile/{{ poll.user.username }}">{{ poll.user.username }} </h2>
+
+        <p>
+            {{ poll.response_yes }} users responded with <b>Yes</b>
+            <br>
+            {{ poll.response_no }} users responded with <b>No</b>
+            <br>
+            <br>
+            This poll was started at {{ poll.date_created }}
+        </p>
+        <hr>
+        {% endfor %}
+
+    </body>
+</html>
