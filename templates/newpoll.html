@@ -1,13 +1,13 @@
-<html>
-    <head>
-        <title>Flask 101</title>
-    </head>
+{% extends "base.html" %}
 
-    <body>
-        <form action="/newpoll" method="POST">
-            Question:<br>
-            <input type="text" name="question"><br>
-            <input type="submit" value="Submit">
-        </form>
-    </body>
-</html>
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <form action="/newpoll" method="POST">
+        Question:<br>
+        <input type="text" name="question"><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

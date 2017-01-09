@@ -1,0 +1,53 @@
+<html>
+    <head>
+        {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user.css') }}">
+
+        <!-- Prettify JS for pretty code snippets-->
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+        {% endblock %}
+    </head>
+
+    <body>
+        <header>
+            {% if current_user.is_authenticated %}
+            Welcome, <a href="/profile/{{ current_user.username }}">{{ current_user.username }}</a>!
+            <br>
+            You are logged in.
+            <br>
+            <a href="/newpoll">Submit a new question</a>
+            <br>
+            <a href="/logout">Log Out</a>
+            {% endif %}
+
+            <div class="container post">
+                <div class="row">
+                    <div class="col-md-9">
+                        <a href="/"><h1>QuestionsAnswered.com</h1></a>
+                        <p>Ask any question and let others answer you.</p>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/login">login</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container post">
+            <div class="row">
+                <div class="col-md-12">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            Made with Flask :)
+        </footer>
+    </body>
+</html>

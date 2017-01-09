@@ -1,35 +1,35 @@
-<html>
-    <head>
-        <title>Flask 101</title>
-    </head>
+{% extends "base.html" %}
 
-    <body>
-        {% if user %}
-        <center><h1>{{ user.username }}'s profile page. Welcome!</h1></center>
+{% block head %}
+    {{ super() }}
+{% endblock %}
 
-        <p>
-            <b>{{ user.username }}</b> has been a member since {{ user.date_created }}!!!
-        </p>
+{% block content %}
+    {% if user %}
+    <h1>{{ user.username }}'s profile page. Welcome!</h1>
 
-        <center><h1>{{ user.username }}'s polls</h1></center>
+    <p>
+        <b>{{ user.username }}</b> has been a member since {{ user.date_created }}!!!
+    </p>
 
-        {% for poll in polls %}
-        <center><h2><a href="/poll/{{ poll.id }}">{{ poll.question }}</a></h2></center>
-        <h2>started by <a href="/profile/{{ poll.user.username }}">{{ poll.user.username }} </h2>
+    <center><h2>{{ user.username }}'s polls</h2></center>
 
-        <p>
-            {{ poll.response_yes }} users responded with <b>Yes</b>
-            <br>
-            {{ poll.response_no }} users responded with <b>No</b>
-            <br>
-            <br>
-            This poll was started at {{ poll.date_created }}
-        </p>
-        <hr>
-        {% endfor %}
+    {% for poll in polls %}
+    <h3><a href="/poll/{{ poll.id }}">{{ poll.question }}</a></h3>
+    <h4>started by <a href="/profile/{{ poll.user.username }}">{{ poll.user.username }}</a></h4>
 
-        {% else %}
-        <h2>That user does not exist.</h2>
-        {% endif %}
-    </body>
-</html>
+    <p>
+        {{ poll.response_yes }} users responded with <b>Yes</b>
+        <br>
+        {{ poll.response_no }} users responded with <b>No</b>
+        <br>
+        <br>
+        This poll was started at {{ poll.date_created }}
+    </p>
+    <hr>
+    {% endfor %}
+
+    {% else %}
+    <h2>That user does not exist.</h2>
+    {% endif %}
+{% endblock %}
