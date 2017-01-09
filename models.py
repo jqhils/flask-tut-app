@@ -4,7 +4,6 @@ import datetime
 from app import db
 
 class User(db.Model):
-
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -34,7 +33,6 @@ class User(db.Model):
 
     def __init__(self, username, password):
         now = datetime.datetime.now()
-
         self.username = username
         self.password = password
         self.date_created = now
@@ -55,7 +53,6 @@ class Poll(db.Model):
 
     def __init__(self, user, question):
         now = datetime.datetime.now()
-
         self.user = user
         self.question = question
         self.response_yes = 0

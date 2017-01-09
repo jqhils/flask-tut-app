@@ -22,46 +22,28 @@ from models import *
 
 @login_manager.user_loader
 def user_loader(user_id):
-    """Given *user_id*, return the associated User object.
-    :param unicode user_id: user_id (email) user to retrieve
-    """
     return User.query.get(int(user_id))
+
 
 @app.route("/")
 def index():
     polls = Poll.query.all()
     return render_template("index.html", polls=polls)
 
+
 @app.route("/profile/<username>")
 def profile(username):
-    '''now = datetime.datetime.now()
-    user = {
-        "user_id" : 25,
-        "username" : "funnyname123",
-        "date_created" : now.strftime("%Y-%m-%d %H:%M")
-    }
-    '''
     fetched_user = User.query.filter_by(username=username).first()
     if (fetched_user):
         polls = Poll.query.filter_by(user=fetched_user)
         return render_template("profile.html", user=fetched_user, polls=polls)
     else:
         return render_template("profile.html", user=None)
-
     return render_template("profile.html", user=user)
+
 
 @app.route("/poll/<int:poll_id>", methods=['GET', 'POST'])
 def show_poll(poll_id):
-    '''now = datetime.datetime.now()
-    poll = {
-        "date_created" : now.strftime("%Y-%m-%d %H:%M"),
-        "poll_id" : 1337,
-        "creator" : 25,
-        "question" : "Do you support Donald Trump?",
-        "response_yes" : 32,
-        "response_no" : 25
-    }
-    '''
     fetched_poll = Poll.query.get(poll_id)
     if (fetched_poll):
         if (request.method == 'POST'):
@@ -75,6 +57,7 @@ def show_poll(poll_id):
         return render_template("poll.html", poll=fetched_poll)
     else:
         return render_template("poll.html", poll=None)
+
 
 @app.route("/newpoll", methods=['GET', 'POST'])
 @login_required
@@ -100,16 +83,17 @@ def login():
                 db.session.commit()
                 login_user(user, remember=True)
                 return redirect("/")
-
         return render_template("login.html")
     else:
         return render_template("login.html")
+
 
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect("/")
+
 
 if __name__ == "__main__":
     app.run()
